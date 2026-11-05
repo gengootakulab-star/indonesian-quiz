@@ -1,0 +1,35 @@
+name: 間違いの報告
+description: 単語の意味・例文・表示などの間違いを教えてください
+title: "[間違い] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ご協力ありがとうございます。分かる範囲で書いてください。
+  - type: input
+    id: word
+    attributes:
+      label: 単語・例文
+      description: 間違いがあった単語や例文(インドネシア語)
+      placeholder: Minta air putih
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: どの部分が違いますか
+      options:
+        - 単語の意味(日本語訳)
+        - 例文の言い回し
+        - 例文の日本語訳
+        - 表示・動作の不具合
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 内容
+      description: どこが違うか、正しいと思う内容(出典があれば)を教えてください
+    validations:
+      required: true
