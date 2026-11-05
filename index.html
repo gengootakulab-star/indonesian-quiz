@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>インドネシア語 単語クイズ | 言語オタクの多言語学習ラボ</title>
+<meta name="description" content="カテゴリーや場面ごとのフレーズでインドネシア語の単語を学び、自分のストックからクイズを出せるツールです。">
+<link rel="icon" type="image/png" href="https://gengootakulab-star.github.io/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#F4F0E7;--fg:#20364A;--sub:#77766F;--card:#fff;--line:#E6D6CB;--ac:#A6533D;--ca:#F0D5CA;--ok:#2F7D5B;--okbg:#D8EBDF;--ng:#B23A3A;--ngbg:#F4D6D6}
+@media (prefers-color-scheme:dark){:root{--bg:#16212C;--fg:#ECE8DF;--sub:#A3A8A8;--card:#1F2D3A;--line:#33465A;--ac:#E08A6E;--ca:#5A3A30;--ok:#7CCBA0;--okbg:#25453A;--ng:#F0908F;--ngbg:#4C2C2C}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Noto Sans JP",-apple-system,"Hiragino Sans",sans-serif;line-height:1.6;padding-top:env(safe-area-inset-top,0px)}
+main{max-width:640px;margin:0 auto;padding:12px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.top a{color:var(--sub);text-decoration:none}
+h1{font-size:20px;margin:8px 0 2px}
+.sub{color:var(--sub);font-size:13px;margin:0 0 12px}
+.warn{background:var(--ca);border-radius:10px;padding:8px 12px;font-size:13px;margin:0 0 12px}
+button{font:inherit;color:inherit;cursor:pointer}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.tabs button{flex:1;border:0;background:none;padding:10px 4px;font-size:13px;color:var(--sub)}
+.tabs button.on{color:var(--ac);font-weight:700}
+.tabs b{display:block;font-size:18px;font-weight:400}
+.seg{display:flex;gap:6px;margin:8px 0 12px}
+.seg button,.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-size:14px}
+.seg button.on,.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:left}
+.cat b{display:block;font-size:16px}.cat span{font-size:12px;color:var(--sub)}
+.bar{height:5px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0}
+.row{display:flex;align-items:center;gap:10px}
+.row .w{flex:1}
+.w b{font-size:18px}.w small{display:block;color:var(--sub);font-size:14px}
+.ic{border:1px solid var(--line);background:var(--bg);border-radius:8px;width:38px;height:38px;font-size:16px;flex:none}
+.ic.on{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--ac);color:#fff;padding:13px;font-size:16px;font-weight:700;margin:10px 0;text-align:center}
+.btn.ghost{background:var(--card);color:var(--fg);border:1px solid var(--line);font-weight:500}
+.btn[disabled]{opacity:.4}
+.back{border:0;background:none;color:var(--sub);padding:4px 0;font-size:14px}
+.phr b{font-size:18px}.phr .jp{color:var(--sub)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips .chip{font-size:13px;padding:4px 10px}.chips .chip.on{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.q{font-size:26px;font-weight:700;text-align:center;margin:18px 0 4px;word-break:break-word}
+.qs{text-align:center;color:var(--sub);font-size:13px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:13px 14px;margin:8px 0;font-size:17px}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ng{border-color:var(--ng);background:var(--ngbg)}
+.prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.prog i{display:block;height:100%;background:var(--ac)}
+.score{font-size:44px;font-weight:700;text-align:center;margin:10px 0 0}
+.lab{font-size:13px;color:var(--sub);margin:14px 0 4px}
+input[type=search]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font:inherit;margin:6px 0}
+.note{font-size:12px;color:var(--sub);margin-top:24px}.note a{color:var(--ac)}
+.rate{font-size:12px;color:var(--sub);white-space:nowrap}
+.empty{text-align:center;color:var(--sub);padding:30px 10px}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="/">← 言語オタクの多言語学習ラボ</a></div>
+<h1>インドネシア語 単語クイズ</h1>
+<p class="sub">学んだ単語がストックされ、そこからクイズが出ます。</p>
+<p class="warn">🚧 作成中のツールです。単語や例文に誤りが含まれている可能性があります。気づいた点は、ページ下部の報告リンクから教えてください。</p>
+<div id="app"></div>
+<p class="note">ストックと成績は、このブラウザの中にだけ保存されます（別の端末や、ブラウザのデータ削除では引き継がれません）。例文や単語の誤りは <a id="rep" target="_blank" rel="noopener">こちらから報告</a> してもらえると助かります。</p>
+</main>
+<nav class="tabs" id="tabs"></nav>
+<script>
+/* ===== データ ===== */
+const CATS=[
+{k:"color",n:"色",e:"🎨",w:[["merah","赤"],["biru","青"],["kuning","黄色"],["hijau","緑"],["hitam","黒"],["putih","白"],["cokelat","茶色"],["oranye","オレンジ色"],["ungu","紫"],["abu-abu","灰色"],["merah muda","ピンク"]]},
+{k:"num",n:"数",e:"🔢",w:[["nol","0（ゼロ）"],["satu","1（いち）"],["dua","2（に）"],["tiga","3（さん）"],["empat","4（よん）"],["lima","5（ご）"],["enam","6（ろく）"],["tujuh","7（なな）"],["delapan","8（はち）"],["sembilan","9（きゅう）"],["sepuluh","10（じゅう）"],["seratus","100（ひゃく）"],["seribu","1000（せん）"]]},
+{k:"food",n:"食べ物",e:"🍚",w:[["nasi","ご飯"],["roti","パン"],["ayam","鶏・鶏肉"],["ikan","魚"],["daging","肉"],["telur","卵"],["sayur","野菜"],["mi","麺"],["sup","スープ"],["garam","塩"],["gula","砂糖"],["goreng","揚げた・炒めた"]]},
+{k:"drink",n:"飲み物",e:"🍵",w:[["air","水"],["teh","お茶・紅茶"],["kopi","コーヒー"],["susu","牛乳"],["jus","ジュース"],["es","氷・アイス（冷たい飲み物）"],["bir","ビール"]]},
+{k:"fruit",n:"果物",e:"🍌",w:[["buah","果物"],["pisang","バナナ"],["apel","りんご"],["jeruk","みかん・オレンジ（柑橘類）"],["mangga","マンゴー"],["nanas","パイナップル"],["semangka","スイカ"],["anggur","ぶどう"]]},
+{k:"family",n:"家族・人",e:"👪",w:[["keluarga","家族"],["ayah","父"],["ibu","母"],["kakak","兄・姉"],["adik","弟・妹"],["anak","子ども"],["kakek","祖父"],["nenek","祖母"],["suami","夫"],["istri","妻"],["teman","友達"]]},
+{k:"day",n:"曜日",e:"📅",w:[["Senin","月曜日"],["Selasa","火曜日"],["Rabu","水曜日"],["Kamis","木曜日"],["Jumat","金曜日"],["Sabtu","土曜日"],["hari Minggu","日曜日"]]},
+{k:"time",n:"時間",e:"⏰",w:[["hari ini","今日"],["besok","明日"],["kemarin","昨日"],["sekarang","今"],["pagi","朝"],["siang","昼"],["sore","夕方"],["malam","夜"],["minggu","週"],["bulan","月（暦の月・空の月）"],["tahun","年"],["jam","時間・〜時"]]},
+{k:"place",n:"場所",e:"🏙️",w:[["rumah","家"],["sekolah","学校"],["kantor","会社・事務所"],["toko","店"],["pasar","市場"],["bandara","空港"],["stasiun","駅"],["rumah sakit","病院"],["hotel","ホテル"],["restoran","レストラン"],["jalan","道"],["toilet","トイレ"]]},
+{k:"verb",n:"動詞",e:"🏃",w:[["makan","食べる"],["minum","飲む"],["pergi","行く"],["datang","来る"],["pulang","帰る"],["beli","買う"],["tidur","寝る"],["bangun","起きる"],["melihat","見る"],["mendengar","聞く"],["membaca","読む"],["menulis","書く"],["berbicara","話す"],["belajar","勉強する"],["bekerja","働く"],["mau","〜したい・欲しい"],["suka","好き"]]},
+{k:"adj",n:"形容詞",e:"✨",w:[["besar","大きい"],["kecil","小さい"],["baru","新しい"],["panas","暑い・熱い"],["dingin","寒い・冷たい"],["enak","おいしい"],["mahal","高い（値段）"],["murah","安い"],["mudah","簡単な"],["sulit","難しい"],["cantik","きれいな"],["bagus","良い・素敵な"],["jauh","遠い"],["dekat","近い"],["tinggi","高い（高さ）"],["pedas","辛い"]]}
+];
+const SCENES=[
+{k:"greet",n:"あいさつ",e:"👋",p:[
+ ["Selamat pagi.","おはようございます。",[["selamat","（あいさつ）良い〜、おめでとう"],["pagi","朝"]]],
+ ["Apa kabar?","お元気ですか？",[["apa","何"],["kabar","様子・知らせ"]]],
+ ["Baik-baik saja.","元気です。",[["baik","良い・元気な"],["saja","〜だけ・〜でいい"]]],
+ ["Terima kasih.","ありがとう。",[["terima kasih","ありがとう"]]],
+ ["Sama-sama.","どういたしまして。",[["sama-sama","どういたしまして"]]],
+ ["Maaf.","ごめんなさい。",[["maaf","ごめんなさい"]]],
+ ["Sampai jumpa lagi.","またお会いしましょう。",[["sampai jumpa","さようなら（また会うまで）"],["lagi","また・もっと"]]]]},
+{k:"intro",n:"自己紹介",e:"🙂",p:[
+ ["Nama saya Aki.","私の名前はアキです。",[["nama","名前"],["saya","私"]]],
+ ["Saya dari Jepang.","私は日本から来ました。",[["dari","〜から"],["Jepang","日本"]]],
+ ["Saya sedang belajar bahasa Indonesia.","私はインドネシア語を勉強中です。",[["sedang","〜しているところ"],["belajar","勉強する"],["bahasa","言語"]]],
+ ["Senang bertemu dengan Anda.","お会いできて嬉しいです。",[["senang","嬉しい・楽しい"],["bertemu","会う"],["Anda","あなた（丁寧）"]]]]},
+{k:"eat",n:"食事",e:"🍽️",p:[
+ ["Saya mau makan nasi goreng.","私はナシゴレンを食べたいです。",[["mau","〜したい・欲しい"],["makan","食べる"],["nasi","ご飯"],["goreng","揚げた・炒めた"]]],
+ ["Boleh minta air putih?","お水をいただけますか？",[["boleh","〜してもよい"],["minta","〜をください（頼む）"],["air","水"],["putih","白"]]],
+ ["Enak sekali!","とてもおいしい！",[["enak","おいしい"],["sekali","とても"]]],
+ ["Pedas tidak?","辛いですか？",[["pedas","辛い"],["tidak","いいえ・〜ない"]]],
+ ["Berapa semuanya?","全部でいくらですか？",[["berapa","いくら・いくつ"],["semua","全部"]]]]},
+{k:"shop",n:"買い物",e:"🛍️",p:[
+ ["Berapa harganya?","いくらですか？",[["berapa","いくら・いくつ"],["harga","値段"]]],
+ ["Terlalu mahal.","高すぎます。",[["terlalu","〜すぎる"],["mahal","高い（値段）"]]],
+ ["Bisa kurang?","安くなりますか？",[["bisa","できる"],["kurang","少ない・足りない"]]],
+ ["Saya beli yang ini.","これを買います。",[["beli","買う"],["yang ini","これ・こちらのもの"]]],
+ ["Ada yang lebih murah?","もっと安いものはありますか？",[["ada","ある・いる"],["lebih","もっと"],["murah","安い"]]]]},
+{k:"move",n:"移動",e:"🚕",p:[
+ ["Di mana stasiun?","駅はどこですか？",[["di mana","どこに"],["stasiun","駅"]]],
+ ["Saya mau ke bandara.","空港に行きたいです。",[["ke","〜へ"],["bandara","空港"]]],
+ ["Lurus saja.","まっすぐ行ってください。",[["lurus","まっすぐ"]]],
+ ["Belok kanan.","右に曲がってください。",[["belok","曲がる"],["kanan","右"]]],
+ ["Berhenti di sini.","ここで止まってください。",[["berhenti","止まる"],["di sini","ここに"]]],
+ ["Berapa lama?","どのくらいかかりますか？",[["lama","（時間が）長い"]]]]},
+{k:"help",n:"困ったとき",e:"🆘",p:[
+ ["Tolong!","助けて！",[["tolong","助けて・〜してください"]]],
+ ["Saya tidak mengerti.","わかりません。",[["mengerti","理解する"],["tidak","いいえ・〜ない"]]],
+ ["Bisa bicara pelan-pelan?","ゆっくり話してもらえますか？",[["bisa","できる"],["bicara","しゃべる・話す（口語）"],["pelan-pelan","ゆっくり"]]],
+ ["Di mana toilet?","トイレはどこですか？",[["di mana","どこに"],["toilet","トイレ"]]],
+ ["Saya sakit.","具合が悪いです。",[["sakit","病気・痛い"]]]]}
+];
+
+/* 単語辞書（id → {id,jp,cat}）を作る */
+const WORDS={};
+CATS.forEach(c=>c.w.forEach(([i,j])=>{WORDS[i.toLowerCase()]={id:i,jp:j,cat:c.k}}));
+SCENES.forEach(s=>s.p.forEach(p=>p[2].forEach(([i,j])=>{if(!WORDS[i.toLowerCase()])WORDS[i.toLowerCase()]={id:i,jp:j,cat:"s_"+s.k}})));
+const wk=i=>i.toLowerCase();
+
+/* ===== 保存 ===== */
+const KEY="idquiz.v1";
+let S={stock:{}};
+try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
+if(!S.stock)S.stock={};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const has=i=>!!S.stock[wk(i)];
+function add(i){if(!has(i)&&WORDS[wk(i)]){S.stock[wk(i)]={t:Date.now(),ok:0,ng:0}}}
+function del(i){delete S.stock[wk(i)]}
+
+/* ===== 読み上げ ===== */
+function say(t){try{if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="id-ID";u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+
+/* ===== UI ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let V={tab:"learn",sub:"cat",cat:null,scene:null,q:"",quiz:null,cfg:{dir:"id2jp",mode:"all",n:10}};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const stockIds=()=>Object.keys(S.stock);
+
+function renderTabs(){
+ const t=[["learn","📖","学ぶ"],["quiz","❓","クイズ"],["stock","🗂️","ストック ("+stockIds().length+")"]];
+ $("#tabs").innerHTML=t.map(([k,e,n])=>`<button data-t="${k}" class="${V.tab===k?"on":""}"><b>${e}</b>${n}</button>`).join("");
+ $("#tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{V.tab=b.dataset.t;V.cat=null;V.scene=null;if(V.tab!=="quiz")V.quiz=null;render()});
+}
+function wordRow(w){
+ const on=has(w.id);
+ return `<div class="card row"><button class="ic" data-say="${esc(w.id)}" aria-label="発音">🔊</button><div class="w"><b>${esc(w.id)}</b><small>${esc(w.jp)}</small></div><button class="ic ${on?"on":""}" data-tog="${esc(w.id)}" aria-label="ストック">${on?"✓":"＋"}</button></div>`;
+}
+function bind(){
+ document.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>say(b.dataset.say));
+ document.querySelectorAll("[data-tog]").forEach(b=>b.onclick=()=>{const i=b.dataset.tog;has(i)?del(i):add(i);save();render(true)});
+}
+function render(keep){
+ const y=keep?window.scrollY:0;
+ renderTabs();
+ const a=$("#app");
+ if(V.tab==="learn")a.innerHTML=viewLearn();
+ else if(V.tab==="quiz")a.innerHTML=viewQuiz();
+ else a.innerHTML=viewStock();
+ bind();bindExtra();
+ window.scrollTo(0,y);
+}
+function catProgress(ws){const n=ws.filter(([i])=>has(i)).length;return [n,ws.length]}
+
+function viewLearn(){
+ let h=`<div class="seg"><button data-sub="cat" class="${V.sub==="cat"?"on":""}">カテゴリーから</button><button data-sub="phrase" class="${V.sub==="phrase"?"on":""}">例文から</button></div>`;
+ if(V.sub==="cat"){
+  if(!V.cat){
+   h+=`<div class="grid">`+CATS.map(c=>{const [n,t]=catProgress(c.w);return `<button class="cat" data-cat="${c.k}"><b>${c.e} ${c.n}</b><span>${n} / ${t} ストック済み</span><div class="bar"><i style="width:${n/t*100}%"></i></div></button>`}).join("")+`</div>`;
+  }else{
+   const c=CATS.find(x=>x.k===V.cat);
+   h+=`<button class="back" data-back>← カテゴリー一覧</button><h2 style="font-size:18px;margin:4px 0">${c.e} ${c.n}</h2><button class="btn ghost" data-all="cat">このカテゴリーを全部ストックに追加</button>`+c.w.map(([i])=>wordRow(WORDS[wk(i)])).join("");
+  }
+ }else{
+  if(!V.scene){
+   h+=`<div class="grid">`+SCENES.map(s=>{const ws=[];s.p.forEach(p=>p[2].forEach(x=>{if(!ws.find(y=>wk(y[0])===wk(x[0])))ws.push(x)}));const [n,t]=catProgress(ws);return `<button class="cat" data-scene="${s.k}"><b>${s.e} ${s.n}</b><span>${s.p.length}フレーズ・単語 ${n}/${t}</span><div class="bar"><i style="width:${n/t*100}%"></i></div></button>`}).join("")+`</div>`;
+  }else{
+   const s=SCENES.find(x=>x.k===V.scene);
+   h+=`<button class="back" data-back>← 場面一覧</button><h2 style="font-size:18px;margin:4px 0">${s.e} ${s.n}</h2><p class="sub">フレーズの下の単語をタップすると、ストックに入ります。</p><button class="btn ghost" data-all="scene">この場面の単語を全部ストックに追加</button>`+
+   s.p.map(p=>`<div class="card phr"><div class="row"><div class="w"><b>${esc(p[0])}</b><div class="jp">${esc(p[1])}</div></div><button class="ic" data-say="${esc(p[0])}" aria-label="発音">🔊</button></div><div class="chips">${p[2].map(([i,j])=>`<button class="chip ${has(i)?"on":""}" data-tog="${esc(i)}">${has(i)?"✓ ":"＋ "}${esc(i)}：${esc(j)}</button>`).join("")}</div></div>`).join("");
+  }
+ }
+ return h;
+}
+
+function viewStock(){
+ const ids=stockIds().map(k=>({...WORDS[k],...S.stock[k],k})).filter(w=>w.id);
+ if(!ids.length)return `<div class="empty">まだストックがありません。<br>「学ぶ」で単語を追加しましょう。</div>`;
+ const q=V.q.trim().toLowerCase();
+ const list=ids.filter(w=>!q||w.id.toLowerCase().includes(q)||w.jp.includes(q)).sort((a,b)=>b.t-a.t);
+ return `<input type="search" id="sq" placeholder="ストックを検索" value="${esc(V.q)}"><p class="sub">${ids.length}語 ・ 新しい順</p>`+
+  list.map(w=>{const t=w.ok+w.ng;const r=t?Math.round(w.ok/t*100)+"%（"+t+"回）":"未挑戦";return `<div class="card row"><button class="ic" data-say="${esc(w.id)}">🔊</button><div class="w"><b>${esc(w.id)}</b><small>${esc(w.jp)}</small></div><span class="rate">${r}</span><button class="ic" data-del="${esc(w.id)}" aria-label="削除">🗑</button></div>`}).join("")+
+  `<button class="btn ghost" data-clear style="margin-top:20px">ストックをすべて削除</button>`;
+}
+
+function viewQuiz(){
+ const Q=V.quiz;
+ if(!Q){
+  const n=stockIds().length;
+  const weak=stockIds().filter(k=>S.stock[k].ng>0).length;
+  const c=V.cfg;
+  if(n<1)return `<div class="empty">クイズに出す単語がありません。<br>先に「学ぶ」で単語をストックしましょう。</div>`;
+  return `<div class="lab">出題の向き</div><div class="seg"><button data-dir="id2jp" class="${c.dir==="id2jp"?"on":""}">インドネシア語 → 日本語</button></div><div class="seg"><button data-dir="jp2id" class="${c.dir==="jp2id"?"on":""}">日本語 → インドネシア語</button><button data-dir="mix" class="${c.dir==="mix"?"on":""}">ミックス</button></div>
+  <div class="lab">出題する単語</div><div class="seg"><button data-mode="all" class="${c.mode==="all"?"on":""}">ストック全部（${n}語）</button><button data-mode="weak" class="${c.mode==="weak"?"on":""}">間違えた単語（${weak}語）</button></div>
+  <div class="lab">問題数</div><div class="seg">${[5,10,20].map(x=>`<button data-n="${x}" class="${c.n===x?"on":""}">${x}問</button>`).join("")}</div>
+  <button class="btn" data-start ${(c.mode==="weak"&&!weak)?"disabled":""}>スタート</button>
+  ${n<4?`<p class="note">ストックが少ないときは、選択肢の一部に、まだ学んでいない単語も混ざります。</p>`:""}`;
+ }
+ if(Q.done){
+  const miss=Q.log.filter(x=>!x.ok);
+  return `<div class="score">${Q.score} / ${Q.items.length}</div><p class="sub" style="text-align:center">${Q.score===Q.items.length?"全問正解！":"おつかれさまでした"}</p>
+  ${miss.length?`<div class="lab">間違えた単語</div>`+miss.map(x=>`<div class="card row"><button class="ic" data-say="${esc(x.w.id)}">🔊</button><div class="w"><b>${esc(x.w.id)}</b><small>${esc(x.w.jp)}</small></div></div>`).join(""):""}
+  <button class="btn" data-again>もう一度</button>${miss.length?`<button class="btn ghost" data-retry>間違えた単語だけもう一度</button>`:""}<button class="btn ghost" data-home>設定にもどる</button>`;
+ }
+ const it=Q.items[Q.i];
+ const prompt=it.dir==="id2jp"?it.w.id:it.w.jp;
+ return `<div class="prog"><i style="width:${Q.i/Q.items.length*100}%"></i></div><div class="qs">${Q.i+1} / ${Q.items.length}　${it.dir==="id2jp"?"インドネシア語 → 日本語":"日本語 → インドネシア語"}</div>
+ <div class="q">${esc(prompt)}</div>${it.dir==="id2jp"?`<div style="text-align:center"><button class="ic" data-say="${esc(it.w.id)}">🔊</button></div>`:""}
+ ${it.opts.map((o,k)=>{let c="";if(Q.ans!=null){if(o.right)c=" ok";else if(k===Q.ans)c=" ng"}return `<button class="opt${c}" data-opt="${k}" ${Q.ans!=null?"disabled":""}>${esc(it.dir==="id2jp"?o.w.jp:o.w.id)}</button>`}).join("")}
+ ${Q.ans!=null?`<div style="text-align:center">${it.dir==="jp2id"?`<button class="ic" data-say="${esc(it.w.id)}">🔊</button>`:""}</div><button class="btn" data-next>${Q.i+1<Q.items.length?"次へ":"結果を見る"}</button>`:""}`;
+}
+
+/* ===== クイズ生成 ===== */
+function makeItems(ids,cfg){
+ const all=Object.values(WORDS);
+ const pickN=Math.min(cfg.n,ids.length);
+ // 間違いが多い単語を少し優先
+ const pri=shuffle(ids).sort((a,b)=>{const sa=S.stock[a],sb=S.stock[b];return (sb.ng-sb.ok)-(sa.ng-sa.ok)+(Math.random()-.5)*2});
+ const chosen=shuffle(pri.slice(0,Math.max(pickN,Math.min(ids.length,pickN))));
+ return chosen.slice(0,pickN).map(k=>{
+  const w=WORDS[k];
+  const dir=cfg.dir==="mix"?(Math.random()<.5?"id2jp":"jp2id"):cfg.dir;
+  const txt=x=>dir==="id2jp"?x.jp:x.id;
+  const used=new Set([txt(w)]);
+  const same=shuffle(all.filter(x=>x.cat===w.cat&&x!==w));
+  const stockOnes=shuffle(all.filter(x=>has(x.id)&&x!==w));
+  const rest=shuffle(all.filter(x=>x!==w));
+  const dist=[];
+  for(const pool of [same.slice(0,2),stockOnes,same,rest]){
+   for(const x of pool){if(dist.length>=3)break;if(used.has(txt(x)))continue;used.add(txt(x));dist.push(x)}
+  }
+  const opts=shuffle([{w,right:true},...dist.map(x=>({w:x,right:false}))]);
+  return {w,dir,opts};
+ });
+}
+function startQuiz(ids){
+ const items=makeItems(ids,V.cfg);
+ V.quiz={items,i:0,score:0,ans:null,log:[],ids};
+}
+
+/* ===== イベント ===== */
+function bindExtra(){
+ const A=$("#app");
+ A.querySelectorAll("[data-sub]").forEach(b=>b.onclick=()=>{V.sub=b.dataset.sub;V.cat=null;V.scene=null;render()});
+ A.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{V.cat=b.dataset.cat;render()});
+ A.querySelectorAll("[data-scene]").forEach(b=>b.onclick=()=>{V.scene=b.dataset.scene;render()});
+ A.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{V.cat=null;V.scene=null;render()});
+ A.querySelectorAll("[data-all]").forEach(b=>b.onclick=()=>{
+  if(b.dataset.all==="cat")CATS.find(c=>c.k===V.cat).w.forEach(([i])=>add(i));
+  else SCENES.find(s=>s.k===V.scene).p.forEach(p=>p[2].forEach(([i])=>add(i)));
+  save();render(true)});
+ A.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{del(b.dataset.del);save();render(true)});
+ const sq=$("#sq");if(sq)sq.oninput=()=>{V.q=sq.value;const p=sq.selectionStart;render(true);const n=$("#sq");n.focus();n.setSelectionRange(p,p)};
+ const cl=A.querySelector("[data-clear]");if(cl)cl.onclick=()=>{if(confirm("ストックと成績をすべて削除します。よろしいですか？")){S.stock={};save();render()}};
+ A.querySelectorAll("[data-dir]").forEach(b=>b.onclick=()=>{V.cfg.dir=b.dataset.dir;render()});
+ A.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{V.cfg.mode=b.dataset.mode;render()});
+ A.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{V.cfg.n=+b.dataset.n;render()});
+ const st=A.querySelector("[data-start]");if(st)st.onclick=()=>{
+  const ids=V.cfg.mode==="weak"?stockIds().filter(k=>S.stock[k].ng>0):stockIds();
+  startQuiz(ids);render()};
+ A.querySelectorAll("[data-opt]").forEach(b=>b.onclick=()=>{
+  const Q=V.quiz,it=Q.items[Q.i],k=+b.dataset.opt,ok=it.opts[k].right;
+  Q.ans=k;if(ok)Q.score++;Q.log.push({w:it.w,ok});
+  const s=S.stock[wk(it.w.id)];if(s){ok?s.ok++:s.ng++}
+  save();render(true);if(it.dir==="jp2id"||ok)say(it.w.id)});
+ const nx=A.querySelector("[data-next]");if(nx)nx.onclick=()=>{const Q=V.quiz;Q.i++;Q.ans=null;if(Q.i>=Q.items.length)Q.done=true;render()};
+ const ag=A.querySelector("[data-again]");if(ag)ag.onclick=()=>{startQuiz(V.quiz.ids);render()};
+ const rt=A.querySelector("[data-retry]");if(rt)rt.onclick=()=>{const m=V.quiz.log.filter(x=>!x.ok).map(x=>wk(x.w.id));startQuiz(m);render()};
+ const hm=A.querySelector("[data-home]");if(hm)hm.onclick=()=>{V.quiz=null;render()};
+}
+$("#rep").href="https://docs.google.com/forms/d/e/1FAIpQLScPkiaUyqVWIROYV46vrNjukSjTbSkjNL-nu2frOm8UpZNkjQ/viewform?usp=pp_url&entry.71590650="+encodeURIComponent("インドネシア語 単語クイズ");
+render();
+</script>
+<script data-goatcounter="https://dream.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
