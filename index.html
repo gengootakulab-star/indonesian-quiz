@@ -63,7 +63,7 @@ input[type=search]{width:100%;padding:10px 12px;border:1px solid var(--line);bor
 <p class="sub">学んだ単語がストックされ、そこからクイズが出ます。</p>
 <p class="warn">🚧 作成中のツールです。単語や例文に誤りが含まれている可能性があります。気づいた点は、ページ下部の報告リンクから教えてください。</p>
 <div id="app"></div>
-<p class="note">ストックと成績は、このブラウザの中にだけ保存されます（別の端末や、ブラウザのデータ削除では引き継がれません）。例文や単語の誤りは <a id="rep" target="_blank" rel="noopener">こちらから報告</a> してもらえると助かります。</p>
+<p class="note">ストックと成績は、このブラウザの中にだけ保存されます（別の端末や、ブラウザのデータ削除では引き継がれません）。単語や例文の誤りは、<a id="rpg" target="_blank" rel="noopener">GitHubで報告</a>（アカウントが必要）か、<a id="rep" target="_blank" rel="noopener">フォームで報告</a>（アカウント不要）してもらえると助かります。</p>
 </main>
 <nav class="tabs" id="tabs"></nav>
 <script>
@@ -289,6 +289,7 @@ function bindExtra(){
  const rt=A.querySelector("[data-retry]");if(rt)rt.onclick=()=>{const m=V.quiz.log.filter(x=>!x.ok).map(x=>wk(x.w.id));startQuiz(m);render()};
  const hm=A.querySelector("[data-home]");if(hm)hm.onclick=()=>{V.quiz=null;render()};
 }
+$("#rpg").href="https://github.com/gengootakulab-star/indonesian-quiz/issues/new?template=report.yml";
 $("#rep").href="https://docs.google.com/forms/d/e/1FAIpQLScPkiaUyqVWIROYV46vrNjukSjTbSkjNL-nu2frOm8UpZNkjQ/viewform?usp=pp_url&entry.71590650="+encodeURIComponent("インドネシア語 単語クイズ");
 render();
 </script>
